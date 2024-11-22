@@ -38,12 +38,13 @@ int main()
 
         // Calculate the average number of cycles per getpid() call
         double avg_latency_cycles = (double)total_cycles / NUM_ITERATIONS;
-        result += avg_latency_cycles;
+        if (j > 0)
+            result += avg_latency_cycles;
 
         // Output the result
         printf("Average latency of getpid() over %d iterations: %.2f cycles\n", NUM_ITERATIONS, avg_latency_cycles);
     }
-    printf("Average latency of getpid() over 10 runs: %.2f cycles\n", result / 10);
+    printf("Average latency of getpid() over 10 runs: %.2f cycles\n", result / 9);
 
     return 0;
 }

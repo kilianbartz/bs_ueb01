@@ -51,7 +51,8 @@ long long int measureSyscallTime(void (*syscall)())
         clock_gettime(CLOCK_MONOTONIC_RAW, &end_ts);
 
         long long int elapsed_time = (end_ts.tv_sec - start_ts.tv_sec) * 1000000000LL + (end_ts.tv_nsec - start_ts.tv_nsec);
-        total_elapsed_time += elapsed_time;
+        if (j > 0)
+            total_elapsed_time += elapsed_time;
     }
 
     return total_elapsed_time;
@@ -70,19 +71,19 @@ int main()
     printf("Measuring time taken for open() syscall\n");
     long long int open_time = measureSyscallTime(measure_open);
 
-    long long int average_elapsed_time = getpid_time / 10;
+    long long int average_elapsed_time = getpid_time / 9;
     printf("Average time taken for %lld getpid() syscalls over 10 runs: %lld nanoseconds\n", num_syscalls, average_elapsed_time);
     printf("Average time per getpid() syscall: %f nanoseconds\n", (double)average_elapsed_time / num_syscalls);
 
-    average_elapsed_time = getuid_time / 10;
+    average_elapsed_time = getuid_time / 9;
     printf("Average time taken for %lld getuid() syscalls over 10 runs: %lld nanoseconds\n", num_syscalls, average_elapsed_time);
     printf("Average time per getuid() syscall: %f nanoseconds\n", (double)average_elapsed_time / num_syscalls);
 
-    average_elapsed_time = gettimeofday_time / 10;
+    average_elapsed_time = gettimeofday_time / 9;
     printf("Average time taken for %lld gettimeofday() syscalls over 10 runs: %lld nanoseconds\n", num_syscalls, average_elapsed_time);
     printf("Average time per gettimeofday() syscall: %f nanoseconds\n", (double)average_elapsed_time / num_syscalls);
 
-    average_elapsed_time = open_time / 10;
+    average_elapsed_time = open_time / 9;
     printf("Average time taken for %lld open() syscalls over 10 runs: %lld nanoseconds\n", num_syscalls, average_elapsed_time);
     printf("Average time per open() syscall: %f nanoseconds\n", (double)average_elapsed_time / num_syscalls);
 
