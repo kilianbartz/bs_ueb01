@@ -1,0 +1,7 @@
+Why the Two Methods Might Differ:
+
+    Method 1 (Per-call): This method is more granular and measures the cycles taken by each individual getpid() call, so it reflects the exact latency for each system call, including overhead like cache misses or other system-level effects.
+
+    Method 2 (Bulk): This method measures the total time for all getpid() calls, so it might not capture the fine-grained latency of each individual call but instead gives an overall performance measure for the entire batch of calls. However, it could be affected by factors like CPU scheduling, pipeline optimizations, and other hardware-level effects that aren't as prominent in Method 1.
+
+In practice, both methods should give roughly similar numbers, but Method 1 might show slightly higher variability due to the per-call measurement, while Method 2 provides a more stable aggregate value.
