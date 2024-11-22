@@ -36,6 +36,11 @@ long long int measureSyscallTime(void (*syscall)())
     for (int j = 0; j < 10; j++)
     {
         printf("Run %d\n", j + 1);
+        // Warm-up loop to allow processor to stabilize
+        for (long long int i = 0; i < 1000; i++)
+        {
+            syscall();
+        }
         clock_gettime(CLOCK_MONOTONIC_RAW, &start_ts);
 
         for (long long int i = 0; i < num_syscalls; i++)
