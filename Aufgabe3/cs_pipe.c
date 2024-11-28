@@ -7,6 +7,7 @@
 #include <sys/resource.h>
 #include <time.h>
 #include <sys/types.h>
+#include <x86intrin.h>
 
 int main()
 {

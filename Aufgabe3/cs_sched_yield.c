@@ -2,6 +2,7 @@
 #include <stdint.h>
 #include <unistd.h>
 #include <x86intrin.h> // For __rdtsc()
+#include <sched.h>
 
 #define NUM_ITERATIONS 10000000
 

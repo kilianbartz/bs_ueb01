@@ -3,7 +3,7 @@
 #include <unistd.h>
 #include <x86intrin.h> // For __rdtsc()
 
-#define NUM_ITERATIONS 10000000
+#define NUM_ITERATIONS 1000000
 
 int main()
 {
