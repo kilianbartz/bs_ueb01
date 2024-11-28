@@ -1,6 +1,6 @@
 #include <unistd.h>
 
-#define NUM_ITERATIONS 1000000
+#define NUM_ITERATIONS 100000
 
 int main()
 {
