@@ -5,6 +5,16 @@
 #include <stdlib.h>
 #include <unistd.h>
 
+void perform_work()
+{
+    // Perform a simple computation to simulate work
+    volatile int sum = 0;
+    for (int i = 0; i < 1000; ++i)
+    {
+        sum += i;
+    }
+}
+
 void *switch_affinity(void *arg)
 {
     cpu_set_t cpuset;
@@ -20,6 +30,7 @@ void *switch_affinity(void *arg)
             perror("sched_setaffinity");
             exit(EXIT_FAILURE);
         }
+        perform_work(); // Perform work after setting affinity
 
         // Set affinity to CPU 1
         CPU_ZERO(&cpuset);
@@ -29,6 +40,7 @@ void *switch_affinity(void *arg)
             perror("sched_setaffinity");
             exit(EXIT_FAILURE);
         }
+        perform_work(); // Perform work after setting affinity
     }
 
     return NULL;
@@ -52,6 +64,6 @@ int main()
         return EXIT_FAILURE;
     }
 
-    printf("Completed 1 million context switches.\n");
+    printf("Completed 1 million context switches with work.\n");
     return EXIT_SUCCESS;
 }
